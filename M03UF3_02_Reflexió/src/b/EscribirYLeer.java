@@ -90,18 +90,18 @@ public class EscribirYLeer
 				String[] values = linea[2].split(" ");
 				Object[] rvalues = new Object[values.length];
 				Class<?>[] cparams = new Class<?>[params.length];
-				
 				for(int i =0;i<params.length;i++) {
 					cparams[i]= Class.forName(params[i]);
 					switch(cparams[i].toString()) {
-						case "java.lang.Integer":
-							
+						case "class java.lang.Integer":
+							rvalues[i] = Integer.parseInt(values[i]);
+							System.out.println(rvalues[i]);
 						break;
 						
 					}
 				}
 				rob.getClass().getMethod(linea[0], cparams)
-				.invoke(rob, linea[2]);
+				.invoke(rob, rvalues);
 				
 			}
 			view();

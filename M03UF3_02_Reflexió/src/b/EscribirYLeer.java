@@ -32,7 +32,7 @@ public class EscribirYLeer
     	
         EscribirYLeer eyl = new EscribirYLeer();
         eyl.escribeFichero(nomFitxer);
-        //eyl.leeFichero(nomFitxer);
+        eyl.leeFichero(nomFitxer);
     }
 
     public void escribeFichero(String fichero)
@@ -50,6 +50,14 @@ public class EscribirYLeer
             	bw.write(methods[r].getName()+";");
             	for (Class<?> c : methods[r].getParameterTypes()) {
             		bw.write(c.getName()+" ");
+            	}
+            	bw.write(";");
+            	for (Class<?> c : methods[r].getParameterTypes()) {
+            		switch (c.getName()) {
+            		case "java.lang.Integer":
+            			
+            			bw.write(rand.nextInt(10)+" ");
+            		}
             	}
             	bw.newLine();
             	
@@ -78,26 +86,25 @@ public class EscribirYLeer
 			if(linea.length==1) {
 				rob.getClass().getMethod(linea[0], null).invoke(rob, null);
 			}else {
+				String[] params = linea[1].split(" ");
+				String[] values = linea[2].split(" ");
+				Object[] rvalues = new Object[values.length];
+				Class<?>[] cparams = new Class<?>[params.length];
 				
-				rob.getClass().getMethod(linea[0], linea[1]).invoke(rob, linea[1]);
+				for(int i =0;i<params.length;i++) {
+					cparams[i]= Class.forName(params[i]);
+					switch(cparams[i].toString()) {
+						case "java.lang.Integer":
+							
+						break;
+						
+					}
+				}
+				rob.getClass().getMethod(linea[0], cparams)
+				.invoke(rob, linea[2]);
+				
 			}
-			
-        	for(int i=0;i<linea.length;i++) {
-        		Field f = p.getClass().getField(cabeceras[i]);
-        		switch(f.getType().toString()) {   //getType et torna el tipus de la variable.
-        		case "class java.lang.String":
-        			f.set(p, linea[i]);
-        			break;
-        		case "int":
-        			f.set(p, Integer.parseInt(linea[i]));
-        			break;
-        		case "double":
-        			f.set(p, Double.parseDouble(linea[i]));
-        			
-        		}
-        	}
-        	System.out.println(p);
-        	
+			view();
         	
         }
         
@@ -112,10 +119,12 @@ public class EscribirYLeer
     }
     
     public void view() {
-    	for(int[] f : Robot.map) {
-    		for(int i : f) {
-    			System.out.println(i);
-    		}
+    	for(int i=0;i<Robot.SIZE;i++) {
+    		for(int j=0;j<Robot.SIZE;j++) {
+    			System.out.print(Robot.map[i][j]);
+    		}System.out.println();
     	}
+    	
+    	System.out.println();
     }
 }

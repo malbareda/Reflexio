@@ -44,7 +44,7 @@ public class Robot {
 		}
 	}
 
-	public void Balla(int i) {
+	public void Balla(Integer i) {
 		System.out.println("El robot balla sensualment");
 		map[x][y] = i;
 	}

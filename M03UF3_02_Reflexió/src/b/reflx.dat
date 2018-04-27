@@ -1,10 +1,10 @@
-Balla int
-Esquerra
-Balla int
-Esquerra
-Esquerra
-Esquerra
-Amunt
-Amunt
-Avall
-Balla int
+Esquerra;;
+Esquerra;;
+Balla;java.lang.Integer ;3 
+Dreta;;
+Esquerra;;
+Avall;;
+Dreta;;
+Esquerra;;
+Balla;java.lang.Integer ;3 
+Avall;;
